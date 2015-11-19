@@ -10,19 +10,22 @@ convertToMeters 0.001;
 
 vertices
 (
-	(2000,-500,-500)	//Near bottom left hand corner
-	(-2000,-500,-500)	//Near bottom right hand corner
-	(2000,1000,-500)	//Far bottom left hand corner
-	(-2000,1000,-500)	//Far bottom right hand corner
-	(2000,-500,500)		//Near Top left hand corner
-	(-2000,-500,500)	//Near top right hand corner
-	(2000,500,500)		//Far top left hand corner
-	(-2000,500,500)		//Far top right hand corner
+	// See Figure 5.4 in User Guide
+	(-4000 -1500 -1500)	//Near bottom right hand corner
+	(4000 -1500 -1500)	//Near bottom left hand corner
+	(4000 1500 -1500)	//Far bottom left hand corner
+	(-4000 1500 -1500)	//Far bottom right hand corner
+
+	(-4000 -1500 1500)	//Near top right hand corner
+	(4000 -1500 1500)		//Near Top left hand corner
+	(4000 1500 1500)		//Far top left hand corner
+	(-4000 1500 1500)		//Far top right hand corner
 );
 
 blocks
 (
-	hex( 0 1 2 3 4 5 6 7 ) ( 10 10 10 ) simpleGrading (1 1 1)//SnappyHexMesh will do the bulk of the work as this is just a background mesh
+	//SnappyHexMesh will do the bulk of the work as this is just a background mesh
+	hex ( 0 1 2 3 4 5 6 7 ) ( 20 7 7 ) simpleGrading (1 1 1)
 );
 
 edges
@@ -31,4 +34,45 @@ edges
 
 boundary
 ( 
+    frontAndBack
+    {
+        type patch;
+        faces
+        (
+            (3 7 6 2)
+            (1 5 4 0)
+        );
+    }
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (2 6 5 1)
+        );
+    }
+    lowerWall
+    {
+        type wall;
+        faces
+        (
+            (0 3 2 1)
+        );
+    }
+    upperWall
+    {
+        type patch;
+        faces
+        (
+            (4 5 6 7)
+        );
+    }
 );
