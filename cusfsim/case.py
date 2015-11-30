@@ -11,6 +11,7 @@ OpenFOAM files are mapped into Python objects using the following conventions:
   * Dimension are represented via the :py:class:`~.Dimension` type.
 
 """
+# pylint: disable=wrong-import-order
 import contextlib
 import datetime
 import enum
